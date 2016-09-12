@@ -11,12 +11,17 @@ import UIKit
 class ViewController: UIViewController {
     
     // MARK: Properties
+    var activity: UIActivityViewController?
     
     // MARK: View LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.updateUI()
+    }
+    
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        self.activity?.dismissViewControllerAnimated(false, completion: nil)
     }
     
     // MARK: Actions
@@ -36,12 +41,23 @@ class ViewController: UIViewController {
         
         let objects = [text, image]
         
-        let activity = UIActivityViewController(activityItems: objects, applicationActivities: nil)
-        activity.popoverPresentationController?.sourceView = self.view
-        activity.popoverPresentationController?.sourceRect = CGRect(x: self.view.frame.size.width/2, y: self.view.frame.size.height/2, width: 0, height: 0)
-        activity.popoverPresentationController?.permittedArrowDirections = .Any
+        self.activity = UIActivityViewController(activityItems: objects, applicationActivities: nil)
         
-        self.presentViewController(activity, animated: true, completion: nil)
+        self.activity?.popoverPresentationController?.sourceView = self.view
+        
+        let x = self.view.frame.size.width/2
+        let y = self.view.frame.size.height/2.8
+        let width = CGFloat(0)
+        let height = width
+        
+        self.activity?.popoverPresentationController?.sourceRect = CGRect(x: x, y: y, width: width, height: height)
+        self.activity?.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
+        
+        if self.activity != nil {
+            self.presentViewController(self.activity!, animated: true, completion: nil)
+        }
+        
     }
+    
 }
 

@@ -11,3 +11,8 @@ import Foundation
 enum Images: String {
     case IMG_01 = "Beach"
 }
+
+enum RotateType: Int {
+    case Portrait = 0
+    case Landscape = 1
+}
