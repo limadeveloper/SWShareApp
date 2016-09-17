@@ -20,26 +20,26 @@ class ViewController: UIViewController {
         self.updateUI()
     }
     
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        self.activity?.dismissViewControllerAnimated(false, completion: nil)
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        self.activity?.dismiss(animated: false, completion: nil)
     }
     
     // MARK: Actions
-    private func updateUI() {
+    fileprivate func updateUI() {
         
-        let button = UIBarButtonItem(barButtonSystemItem: .Action, target: self, action: #selector(self.share))
-        button.tintColor = UIColor.redColor()
+        let button = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(self.share))
+        button.tintColor = UIColor.red
         
         self.navigationItem.rightBarButtonItem = button
     }
     
-    @objc private func share() {
+    @objc fileprivate func share() {
         
         let url = "https://developer.apple.com/"
         let text = "Apple Developer \n\(url)"
         let image = UIImage(named: Images.IMG_01.rawValue)!
         
-        let objects = [text, image]
+        let objects = [text, image] as [Any]
         
         self.activity = UIActivityViewController(activityItems: objects, applicationActivities: nil)
         
@@ -54,7 +54,7 @@ class ViewController: UIViewController {
         self.activity?.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
         
         if self.activity != nil {
-            self.presentViewController(self.activity!, animated: true, completion: nil)
+            self.present(self.activity!, animated: true, completion: nil)
         }
         
     }

@@ -1,4 +1,4 @@
 # ShareApp
-- Swift 2
-- Xcode 7
-- iOS 9
+- Swift 3
+- Xcode 8
+- iOS 10
